@@ -26,8 +26,9 @@ const client = new MongoClient(uri, {
 
 const runServer = async() => {
     try {
+
+        // skills get request
         const mySkill = client.db("Portfolio").collection("skills");
-        
         app.get('/skills', async(req, res) => {
             const query = {}
             const cursor = mySkill.find(query);
@@ -35,6 +36,17 @@ const runServer = async() => {
             res.send(skills);
             // console.log(skills)
         })
+
+        // Blogs get request (...Test...)
+        const myBlogs = client.db("Portfolio").collection("blog-posts");
+        app.get('/blogs', async(req, res) => {
+            const query = {};
+            const cursor = myBlogs.find(query);
+            const blogs = await cursor.toArray();
+            console.log(blogs);
+            res.send(blogs);
+        })
+
     } finally {
 
     }
